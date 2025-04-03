@@ -1,0 +1,253 @@
+/*
+Theme Name: Example Theme
+Text Domain: example-theme
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+}
+
+aside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 6px;
+}
+
+aside a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #111111;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    border-radius: 6px;
+}
+
+aside .search {
+    padding: 1rem;
+    border: #333 1px solid;
+    border-radius: 6px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+    background-image: url('img/wave2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    background-image: url('wave.svg');
+    background-repeat: no-repeat;
+}
+
+.header-top-left,
+.header-top-right {
+    text-align: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.page-header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0 1rem 0 0;
+    margin: 0;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.page-header nav ul li a {
+    color: #f4f4f4;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #111111;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    border-radius: 6px;
+}
+
+.current-menu-item a {
+    background-color: #666 !important;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 20rem;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f4f4f4;
+    text-align: center;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.products h2 {
+    width: 100%;
+}
+
+.products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    background-color: #fff;
+    margin-bottom: 2rem;
+    border-radius: 6px;
+}
+
+.product img, .single img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.all {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+
+.all a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #111111;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    border-radius: 6px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.single {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    background-color: #fff;
+    margin: 0.5rem;
+    border-radius: 6px;
+}
+
+.single img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.breadcrumbs {
+    margin-bottom: 1rem;
+    width: 100%;
+    padding-left: 1rem;
+}
+
+.breadcrumbs a {
+    color: #8375ef;
+    text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0;
+    }
+
+    main {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    aside {
+        width: 25%;
+        margin-top: 4.7rem;
+        margin-bottom: 2rem;
+    }
+
+    .page-header {
+        width: 100%;
+    }
+
+    .header-top-left,
+    .header-top-right {
+        display: flex;
+        align-items: center;
+        width: auto;
+    }
+
+    .hero {
+        height: auto;
+    }
+
+    .hero img {
+        max-width: 1200px;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .product {
+        flex: 0 0 calc(33.333% - 2rem);
+    }
+
+    .single {
+        padding: 2rem 4rem;
+        margin: 2rem 0;
+    }
+}
