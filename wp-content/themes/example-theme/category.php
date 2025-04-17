@@ -1,4 +1,5 @@
 <?php
+global $wp_query;
 get_header();
 ?>
 <section class="hero">

@@ -36,10 +36,10 @@ aside {
 }
 
 aside a {
-    color: #fff;
+    color: #040b2e;
     text-decoration: none;
     padding: 1rem;
-    background-color: #111111;
+    background-color: #a8bde4;
     white-space: nowrap;
     margin-left: 0.5rem;
     border-radius: 6px;
@@ -58,7 +58,6 @@ footer {
     margin: 2rem 0;
     text-align: center;
     width: 100%;
-    background-image: url('img/wave2.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -188,10 +187,11 @@ footer {
 .single img {
     display: block;
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
     object-fit: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 6px;
+    max-height: 80vh;
 }
 
 .breadcrumbs {
