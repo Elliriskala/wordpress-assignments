@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
 function get_random_post_image($category_id)
 {
     $args = array(

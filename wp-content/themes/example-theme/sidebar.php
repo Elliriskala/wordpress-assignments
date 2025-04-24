@@ -1,3 +1,9 @@
+<?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <aside>
     <section class='search'>
         <?php

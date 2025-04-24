@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
 /*
 Plugin Name: Like Button
 Description: Adds a like button to posts
@@ -32,7 +35,7 @@ register_activation_hook(__FILE__, 'create_table');
 
 // Add like button
 
-function like_button()
+function like_button($atts): string
 {
     global $wpdb;
 
@@ -41,6 +44,9 @@ function like_button()
     $post_id = get_the_ID();
 
     $user_id = get_current_user_id();
+    if (isset($atts['post_id'])) {
+        $post_id = $atts['post_id'];
+    }
 
     $data = array(
         'post_id' => $post_id,
@@ -48,9 +54,9 @@ function like_button()
     );
 
     // tarkista tykkäysten määrä
-    $results = $wpdb->get_results( "SELECT * FROM $table_name WHERE post_id = $post_id" );
+    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE post_id = $post_id");
 
-    $likes = count( $results );
+    $likes = count($results);
 
     // tarkista onko käyttäjä jo tykännyt
     $preparedQuery = $wpdb->prepare("SELECT * FROM $table_name WHERE post_id = %d AND user_id = %d", $data);
@@ -60,10 +66,11 @@ function like_button()
     if (count($user_results) == 0) {
         $icon = 'thumbs-up-outline';
     }
-
+    $nonce = wp_create_nonce('like_form_nonce');
     $output = '<form id="like-form" method="post" action="' . admin_url('admin-post.php') . '">';
+    $output .= '<input type="hidden" name="like_form_nonce" value="' . $nonce . '">';
     $output .= '<input type="hidden" name="action" value="add_like">';
-    $output .= '<input type="hidden" name="post_id" value="' . $post_id . '">';
+    $output .= '<input id="post_id" type="hidden" name="post_id" value="' . $post_id . '">';
     $output .= '<button id="like-button" type="submit"><ion-icon name="' . $icon . '"></ion-icon></button>';
     $output .= '<span id="like-count">' . $likes . '</span>';
     $output .= '</form>';
@@ -78,6 +85,10 @@ add_shortcode('like_button', 'like_button');
 function add_like()
 {
     global $wpdb;
+
+    if (!isset($_POST['like_form_nonce']) || !wp_verify_nonce($_POST['like_form_nonce'], 'like_form_nonce')) {
+        die('CSRF token invalid');
+    }
 
     $table_name = $wpdb->prefix . 'likes';
 
@@ -110,7 +121,7 @@ function add_like()
         $success = $wpdb->insert($table_name, $data, $format);
 
         if ($success) {
-            echo 'Like added';
+            echo like_button(['post_id' => $post_id]);
         } else {
             echo 'Error adding like';
         }
@@ -129,12 +140,12 @@ function add_like()
         $success = $wpdb->delete($table_name, $where, $where_format);
 
         if ($success) {
-            echo 'Data deleted';
+            echo like_button(['post_id' => $post_id]);
         } else {
             echo 'Error deleting data';
         }
     }
-    wp_redirect($_SERVER['HTTP_REFERER']);
+    // wp_redirect($_SERVER['HTTP_REFERER']);
     exit;
 }
 
@@ -148,3 +159,19 @@ function my_theme_load_ionicons_font()
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_load_ionicons_font');
+
+add_action('wp_ajax_add_like', 'add_like');
+
+function like_button_enqueue_script(): void
+{
+    wp_register_script('like-button', plugin_dir_url(__FILE__) . '/like-button.js', [], '1.0', true);
+
+    $script_data = array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('like_form_nonce')
+    );
+    wp_localize_script('like-button', 'likeButton', $script_data);
+    wp_enqueue_script('like-button');
+}
+
+add_action('wp_enqueue_scripts', 'like_button_enqueue_script');

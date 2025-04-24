@@ -150,6 +150,10 @@ footer {
     border-radius: 6px;
 }
 
+.product img {
+    height: 200px
+}
+
 .product img, .single img {
     width: 100%;
     object-fit: cover;
