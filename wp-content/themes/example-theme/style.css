@@ -15,6 +15,7 @@ Text Domain: example-theme
   line-height: 1.5;
   color: #c1c1c1;
   background-color: #131313;
+  overflow-x: hidden;
 }
 
 body {
@@ -77,6 +78,7 @@ main {
   margin: 0;
   width: 100%;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .page-header nav ul li a,
@@ -389,5 +391,11 @@ main {
 @media (min-width: 1000px) {
   .product {
     flex: 0 0 calc(33.333% - 2rem);
+  }
+}
+
+@media (max-width: 500px) {
+  #menu-item-160, .menu-item-160 {
+    margin-bottom: 3rem;
   }
 }
