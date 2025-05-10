@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Template Name: Your likes Page
+ * Template Post Type: page
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }

@@ -6,19 +6,23 @@ if (!defined('ABSPATH')) {
 
 global $wp_query;
 get_header();
+
+$category = get_queried_object();
+
 ?>
 <section class="hero">
     <div class="hero-text">
         <?php
-        echo '<h1>' . single_cat_title('', false) . '</h1>';
-        echo '<p>'  . category_description() . '</p>';
+        echo '<p>' . category_description() . '</p>';
         ?>
     </div>
     <img src="<?php echo get_random_post_image(get_queried_object_id()); ?>" alt="randomkuva">
 </section>
 <main>
+    <section class="section-header">
+        <h1><?php echo esc_html($category->name); ?></h1>
+    </section>
     <section class="products">
-        <h2>Products</h2>
         <?php
 
         generate_article($wp_query);

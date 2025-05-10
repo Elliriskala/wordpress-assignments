@@ -6,8 +6,13 @@ if (!defined('ABSPATH')) {
 
 ?>
 
-<footer>
-    <p>&copy; 2024 ILE</p>
+<footer class="footer-nav">
+    <div class="footer-right">
+        <p>&copy; 2001 Hellthread Vintage</p>
+    </div>
+    <div class="footer-left">
+        <?php wp_nav_menu(["theme-location" => "main-menu", "container" => "nav"]); ?>
+    </div>
 </footer>
 </div>
 <dialog id="single-post">

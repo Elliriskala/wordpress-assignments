@@ -90,3 +90,36 @@ function mytheme_enqueue_scripts(): void
 }
 
 add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');
+
+// add the size taxonomyto filter products by size
+function register_size_taxonomy()
+{
+    register_taxonomy('size', 'post', [
+        'labels' => [
+            'name' => 'Sizes',
+            'singular_name' => 'Size',
+        ],
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'hierarchical' => true,
+        'rewrite' => ['slug' => 'size', 'with_front' => false],
+        'has_archive' => true,
+    ]);
+}
+add_action('init', 'register_size_taxonomy');
+
+// add tags to each posts
+function get_post_tags($content)
+{
+
+    if (is_singular('post') && is_main_query()) {
+
+        $tags = the_tags('<div class="tags">Tags: ', ' ', '</div>');
+
+        $content .= $tags;
+    }
+    return $content;
+}
+add_filter('the_content', 'get_post_tags');

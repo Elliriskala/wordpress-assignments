@@ -6,46 +6,45 @@ if (!defined('ABSPATH')) {
 
 get_header();
 ?>
-    <section class="hero">
-        <div class="hero-text">
-            <?php
-            echo '<h1>' . single_cat_title('', false) . '</h1>';
-            echo '<p>' . category_description() . '</p>';
-            ?>
-        </div>
+<section class="hero">
+    <div class="hero-text">
         <?php
-        $header_images = get_uploaded_header_images();
-        array_shift($header_images);
+        echo '<p>' . category_description() . '</p>';
         ?>
-        <img src="<?php echo $header_images[0]['url'] ?>" alt="headerkuva"
-             width="<?php echo get_custom_header()->width; ?>"
-             height="<?php echo get_custom_header()->height; ?>">
-    </section>
-    <main>
+    </div>
+    <?php
+    $header_images = get_uploaded_header_images();
+    array_shift($header_images);
+    ?>
+    <img src="<?php echo $header_images[0]['url'] ?>" alt="headerkuva"
+        width="<?php echo get_custom_header()->width; ?>"
+        height="<?php echo get_custom_header()->height; ?>">
+</section>
+<main>
+
+    <?php
+    echo do_shortcode('[searchandfilter fields="category,size" headings="Band,Size" submit_label="Filter" class="filter"]');
+
+    $args = ['child_of' => get_queried_object_id()];
+    $subcategories = get_categories($args);
+
+    foreach ($subcategories as $subcategory) :
+    ?>
         <section class="products">
             <?php
-            $args = ['child_of' => get_queried_object_id()];
-            $subcategories = get_categories($args);
-
-            foreach ($subcategories as $subcategory) :
-                echo '<h2>' . $subcategory->name . '</h2>';
-
-                $args = [
-                    'post_type' => 'post',
-                    'cat' => $subcategory->term_id,
-                    'posts_per_page' => 3,
-                ];
-                $products = new WP_Query($args);
-                generate_article($products);
-                ?>
-                <article class="product all">
-                    <a href="<?php echo get_category_link($subcategory->term_id); ?>">View all</a>
-                </article>
-                <?php
-                wp_reset_postdata();
-            endforeach;
+            $args = [
+                'post_type' => 'post',
+                'cat' => $subcategory->term_id,
+                'posts_per_page' => 3,
+            ];
+            $products = new WP_Query($args);
+            generate_article($products);
+            wp_reset_postdata();
             ?>
         </section>
-    </main>
+    <?php
+    endforeach;
+    ?>
+</main>
 <?php
 get_footer();

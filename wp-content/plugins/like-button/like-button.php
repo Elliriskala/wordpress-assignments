@@ -62,9 +62,9 @@ function like_button($atts): string
     $preparedQuery = $wpdb->prepare("SELECT * FROM $table_name WHERE post_id = %d AND user_id = %d", $data);
     $user_results = $wpdb->get_results($preparedQuery);
 
-    $icon = 'thumbs-up';
+    $icon = 'heart';
     if (count($user_results) == 0) {
-        $icon = 'thumbs-up-outline';
+        $icon = 'heart-outline';
     }
     $nonce = wp_create_nonce('like_form_nonce');
     $output = '<form id="like-form" method="post" action="' . admin_url('admin-post.php') . '">';
