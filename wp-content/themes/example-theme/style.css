@@ -293,7 +293,7 @@ main {
 .contact-main {
   background-color: black;
   margin: 2rem auto;
-  width: 60%;
+  width: 80%;
   border-radius: 6px;
   box-shadow: 0 0 10px 0 rgb(145, 145, 145);
 }
@@ -343,6 +343,9 @@ main {
 }
 
 @media (min-width: 800px) {
+  .contact-main {
+    width: 60%;
+  }
   .container {
     padding: 0;
   }
@@ -395,7 +398,8 @@ main {
 }
 
 @media (max-width: 500px) {
-  #menu-item-160, .menu-item-160 {
+  #menu-item-160,
+  .menu-item-160 {
     margin-bottom: 3rem;
   }
 }
